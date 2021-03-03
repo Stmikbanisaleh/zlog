@@ -1,6 +1,6 @@
 <?php
 
-class Model_quota extends CI_model
+class Model_profile extends CI_model
 {
 
 
@@ -10,19 +10,12 @@ class Model_quota extends CI_model
         return $this->db->get($table);
     }
 
-	public function viewOrderingCustom($table, $order, $ordering)
-    {
-        return $this->db->query("select a.*,b.name as nama_operator from quota a join operator b on a.operator = b.id");
-    }
-
     public function viewWhereOrdering($table, $data, $order, $ordering)
     {
         $this->db->where($data);
-        $this->db->where('isdeleted !=', 1);
         $this->db->order_by($order, $ordering);
         return $this->db->get($table);
     }
-
 
 	public function checkDuplicate($data, $table)
     {

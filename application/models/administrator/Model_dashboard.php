@@ -32,7 +32,7 @@ class Model_dashboard extends CI_model
 
     public function checkLogin($email, $password)
     {
-		$result = $this->db->query("select email, password,name ,role_id,image, last_login,is_active from user where email ='" . $email . "' and Password = '" . $password . "' and is_active = 1");
+		$result = $this->db->query("select email, password,name ,role_id, image, last_login,is_active from user where email ='" . $email . "' and Password = '" . $password . "' and is_active = 1");
         return $result;
     }
 

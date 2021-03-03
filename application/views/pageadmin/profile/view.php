@@ -11,12 +11,50 @@
 							</button>
 						</div>
 						<div class="card-body">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-user"></i></span>
-								</div>
+							<div class="form-group">
+								<label>Nama Perusahaan</label>
 								<input required type="hidden" id="e_id" name="e_id" >
-								<input required type="text" id="e_nama" name="e_nama" class="form-control" placeholder="Nama Bank">
+								<input required type="text" id="e_nama_perusahaan" name="e_nama_perusahaan" class="form-control" placeholder="Nama Perusahaan">
+							</div>
+
+							<div class="form-group">
+								<label>Telp 1</label>
+								<input type="text" id="e_telp1" name="e_telp1" class="form-control" placeholder="Telp 1">
+							</div>
+
+							<div class="form-group">
+								<label>Telp 2</label>
+								<input type="text" id="e_telp2" name="e_telp2" class="form-control" placeholder="Telp 2">
+							</div>
+
+							<div class="form-group">
+								<label>Kabupaten</label>
+								<input type="text" id="e_kabupaten" name="e_kabupaten" class="form-control" placeholder="Kabupaten">
+							</div>
+						
+							<div class="form-group">
+								<label>Kecamatan</label>
+								<input type="text" id="e_kecamatan" name="e_kecamatan" class="form-control" placeholder="Kecamatan">
+							</div>
+
+							<div class="form-group">
+								<label>Kode Pos</label>
+								<input type="text" id="e_kode_pos" name="e_kode_pos" class="form-control" placeholder="Kode Pos">
+							</div>
+
+							<div class="form-group">
+								<label>Nama Jalan</label>
+								<input type="text" id="e_nama_jalan" name="e_nama_jalan" class="form-control" placeholder="Alamat / Jalan">
+							</div>
+
+							<div class="form-group">
+								<label>Footer 1</label>
+								<input type="text" id="e_footer1" name="e_footer1" class="form-control" placeholder="Footer 1">
+							</div>
+
+							<div class="form-group">
+								<label>Footer 2</label>
+								<input type="text" id="e_footer2" name="e_footer2" class="form-control" placeholder="Footer 2">
 							</div>
 						</div>
 						<!-- /.card-body -->
@@ -40,13 +78,13 @@
 
 	<div class="card">
 		<div class="card-header">
-			<h3 class="card-title">Daftar Role</h3>
+			<h3 class="card-title"><?= $page_name; ?></h3>
 		</div>
 		<br>
-		<div class="col-sm-2">
+		<!-- <div class="col-sm-2">
 			<button href="#modalTambah" type="button" role="button" data-toggle="modal"
 			 class="btn btn-block btn-primary"><a class="ace-icon fa fa-plus bigger-120"></a> Add Role</button>
-		</div>
+		</div> -->
 		<br>
 		<div class="card-body p-0">
 			<table id="table_id" class="table table-bordered table-hover projects">
@@ -56,18 +94,33 @@
 							#
 						</th>
 						<th class="text-center">
-							Nama Role
+							Nama Perusahaan
 						</th>
 						<th class="text-center">
-							#
+							Telp 1
 						</th>
 						<th class="text-center">
-							Created By
+							Telp 2
 						</th>
 						<th class="text-center">
-							Created Date
+							Kabupaten
 						</th>
-						<th style="width: 16%" class="text-center">
+						<th class="text-center">
+							Kecamatan
+						</th>
+						<th class="text-center">
+							Kode Pos
+						</th>
+						<th class="text-center">
+							Nama Jalan
+						</th>
+						<th class="text-center">
+							Footer 1
+						</th>
+						<th class="text-center">
+							Footer 2
+						</th>
+						<th  class="text-center">
 							Action
 						</th>
 					</tr>
@@ -108,7 +161,7 @@
 			submitHandler: function(form) {
 				$('#btn_simpan').html('Sending..');
 				$.ajax({
-					url: "<?php echo base_url('administrator/role/simpan') ?>",
+					url: "<?php echo base_url('administrator/profile/simpan') ?>",
 					type: "POST",
 					data: $('#formTambah').serialize(),
 					dataType: "json",
@@ -146,7 +199,7 @@
 			if (result.value) {
 				$.ajax({
 					type: "POST",
-					url: "<?php echo base_url('administrator/role/delete') ?>",
+					url: "<?php echo base_url('administrator/profile/delete') ?>",
 					async: true,
 					dataType: "JSON",
 					data: {
@@ -169,7 +222,7 @@
 	function show_data() {
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo site_url('administrator/role/tampil') ?>',
+			url: '<?php echo site_url('administrator/profile/tampil') ?>',
 			async: true,
 			dataType: 'json',
 			success: function(data) {
@@ -179,17 +232,19 @@
 				for (i = 0; i < data.length; i++) {
 					html += '<tr>' +
 						'<td class="text-left">' + no + '</td>' +
-						'<td class="text-left">' + data[i].nama + '</td>' +
-						'<td class="text-left">###</td>' +
-						'<td class="text-left">' + data[i].createdBy + '</td>' +
-						'<td class="text-left">' + data[i].createdAt + '</td>' +
+						'<td class="text-left">' + data[i].nama_perusahaan + '</td>' +
+						'<td class="text-left">'+  data[i].no_telp1 +'</td>' +
+						'<td class="text-left">'+  data[i].no_telp2 +'</td>' +
+						'<td class="text-left">' + data[i].kabupaten + '</td>' +
+						'<td class="text-left">' + data[i].kecamatan + '</td>' +
+						'<td class="text-left">' + data[i].kode_pos + '</td>' +
+						'<td class="text-left">' + data[i].nama_jalan + '</td>' +
+						'<td class="text-left">' + data[i].kata_footer1 + '</td>' +
+						'<td class="text-left">' + data[i].kata_footer2 + '</td>' +
 						'<td class="project-actions text-right">' +
 						'   <button  class="btn btn-primary btn-sm item_edit"  data-id="' + data[i].id + '">' +
 						'      <i class="fas fa-folder"> </i>  Edit </a>' +
 						'</button> &nbsp' +
-						'   <button  class="btn btn-danger btn-sm item_hapus"  data-id="' + data[i].id + '">' +
-						'      <i class="fas fa-trash"> </i>  Hapus </a>' +
-						'</button> ' +
 						'</td>' +
 						'</tr>';
 					no++;
@@ -218,7 +273,7 @@
 		$('#modalEdit').modal('show');
 		$.ajax({
 			type: "POST",
-			url: "<?php echo base_url('administrator/role/tampil_byid') ?>",
+			url: "<?php echo base_url('administrator/profile/tampil_byid') ?>",
 			async: true,
 			dataType: "JSON",
 			data: {
@@ -226,8 +281,16 @@
 			},
 			success: function(data) {
 				$('#e_id').val(data[0].id);
-				$('#e_nama').val(data[0].nama);
-				// $('#e_keterangan').val(data[0].keterangan);
+				$('#e_nama_perusahaan').val(data[0].nama_perusahaan);
+				$('#e_telp1').val(data[0].no_telp1);
+				$('#e_telp2').val(data[0].no_telp2);
+				$('#e_footer1').val(data[0].kata_footer1);
+				$('#e_footer2').val(data[0].kata_footer2);
+				$('#e_kabupaten').val(data[0].kabupaten);
+				$('#e_kecamatan').val(data[0].kecamatan);
+				$('#e_kode_pos').val(data[0].kode_pos);
+				$('#e_nama_jalan').val(data[0].nama_jalan);
+
 			}
 		});
 	});
@@ -259,7 +322,7 @@
             submitHandler: function(form) {
                 $('#btn_edit').html('Sending..');
                 $.ajax({
-                    url: "<?php echo base_url('administrator/role/update') ?>",
+                    url: "<?php echo base_url('administrator/profile/update') ?>",
                     type: "POST",
                     data: $('#formEdit').serialize(),
                     dataType: "json",

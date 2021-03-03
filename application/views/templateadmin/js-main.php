@@ -49,6 +49,14 @@
 		});
 	}
 
+	function passwordNotMatch(){
+		Swal.fire({
+		  icon: 'error',
+		  title: 'Password / Password Confirm Tidak Sesuai',
+		  text: 'Password Tidak Sama',
+		});
+	}
+
 	function swalPotonganFailed(){
 		Swal.fire({
 		  icon: 'error',

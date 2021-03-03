@@ -1,5 +1,5 @@
 <section class="content">
-	<div id="my-modal" class="modal fade" tabindex="-1">
+	<div id="modalTambah" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<form class="form-horizontal" role="form" id="formTambah">
@@ -28,8 +28,8 @@
 
 							<div class="form-group">
 								<label>Role User</label>
-								<select class="form-control select2" style="width: 100%;" name="role" id="role">
-									<option selected="selected">-- Pilih --</option>
+								<select required class="form-control select2" style="width: 100%;" name="role" id="role">
+									<option value="" selected="selected">-- Pilih --</option>
 									<?php foreach ($myrole as $value) { ?>
 										<option value=<?= $value['id'] ?>><?=  $value['nama'] ?></option>
 									<?php } ?>
@@ -55,6 +55,11 @@
 									<span class="input-group-text"><i class="fas fa-key"></i></span>
 								</div>
 								<input type="password" id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="Password Confirm">
+							</div>
+
+							<div class="form-group">
+								<label>Foto</label>
+								<input type="file" id="photo" name="photo" class="form-control" placeholder="Password Confirm">
 							</div>
 
 							<div class="input-group mb-3">
@@ -89,7 +94,7 @@
 		</div>
 		<br>
 		<div class="col-sm-2">
-			<button href="#my-modal" type="button" role="button" data-toggle="modal" 
+			<button href="#modalTambah" type="button" role="button" data-toggle="modal" 
 			class="btn btn-block btn-primary"><a class="ace-icon fa fa-plus bigger-120"></a> Add User</button>
 		</div>
 		<br>
@@ -163,11 +168,15 @@
 			},
 			submitHandler: function(form) {
 				$('#btn_simpan').html('Sending..');
+				formdata = new FormData(form);
 				$.ajax({
 					url: "<?php echo base_url('administrator/customer/simpan') ?>",
 					type: "POST",
-					data: $('#formTambah').serialize(),
-					dataType: "json",
+					data: formdata,
+					processData: false,
+					contentType: false,
+					cache: false,
+					async: false,
 					success: function(response) {
 						$('#btn_simpan').html('<i class="ace-icon fa fa-save"></i>' +
 							'Simpan');
@@ -176,8 +185,15 @@
 							swalInputSuccess();
 							show_data();
 							$('#modalTambah').modal('hide');
+						} else if (response == 400){
+							passwordNotMatch();
+						} else if(response == 401){
+							swalIdDouble();
 						} else {
-							swalInputFailed();
+							document.getElementById("formTambah").reset();
+							swalInputSuccess();
+							show_data();
+							$('#modalTambah').modal('hide');
 						}
 					}
 				});
@@ -200,7 +216,7 @@
 			if (result.value) {
 				$.ajax({
 					type: "POST",
-					url: "<?php echo base_url('siswa/delete') ?>",
+					url: "<?php echo base_url('administrator/customer/delete') ?>",
 					async: true,
 					dataType: "JSON",
 					data: {

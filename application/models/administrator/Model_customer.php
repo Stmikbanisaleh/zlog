@@ -14,6 +14,12 @@ class Model_customer extends CI_model
         return $this->db->get($table);
     }
 
+	public function checkDuplicate($data, $table)
+    {
+        $this->db->where('email',$data['email']);
+        return $this->db->get($table)->num_rows();
+    }
+
     public function viewWhereOrdering($table, $data, $order, $ordering)
     {
         $this->db->where($data);

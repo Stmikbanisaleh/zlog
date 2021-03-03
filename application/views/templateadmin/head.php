@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/plugins/select2/css/select2.min.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/plugins/fontawesome-free/css/all.min.css">
+	<link rel="icon" href="<?= base_url() ?>assets/file/website/icon.png" type="image/icon type">
 	<!-- Select2 -->
 	<link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/plugins/select2/css/select2.min.css">
 
@@ -42,9 +43,8 @@
 	<!-- AdminLTE App -->
 	<script src="<?= base_url() ?>assets/adminlte/dist/js/adminlte.min.js"></script>
 	<script src="<?= base_url() ?>assets/adminlte/dist/js/jquery.validate.min.js"></script>
-	<!-- Select2 -->
-	<script src="<?= base_url() ?>assets/adminlte/plugins/chart.js/Chart.min.js"></script>
-	<script src="<?= base_url() ?>assets/adminlte/dist/js/pages/dashboard3.js"></script>
+	<!-- Dashboard data -->
+
 
 	<script src="<?= base_url() ?>assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
 	<style>

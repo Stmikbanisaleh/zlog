@@ -17,6 +17,16 @@ class Model_selesai extends CI_model
         return $this->db->get($table);
     }
 
+	public function viewCustomTampil($table, $data)
+    {
+        
+        return $this->db->query("select a.airwaybill, a.tgl_pengiriman ,a.tgl_estimasi,a.id, a.nomor,a.keterangan , b.nama as agent , c.nama as driver , d.nama as jalur from pengiriman a
+		join agent b on a.agent = b.id
+		join driver c on a.driver = c.id 
+		join ekspedisi d on a.jalur = d.id 
+		order by a.createdAt desc");
+    }
+	
 	public function viewWhereCustomOrdering()
     {
 		return $this->db->query("select * from pengiriman where keterangan = 0 or keterangan = 1 ");

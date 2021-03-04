@@ -174,4 +174,44 @@ class Customer extends CI_Controller
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
 		}
 	}
+
+	public function notification()
+	{
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+			if ($this->input->post('view') != '') {
+				$this->db->query("UPDATE status_log SET is_read = 1 WHERE is_read = 0");
+			}
+			$data = $this->db->query("Select a.*,b.airwaybill  from status_log a join pengiriman b on a.id_pengiriman = b.id order by a.createdAt desc limit 10")->result_array();
+			$output = '';
+			$status = '';
+
+			if ($data != null) {
+				foreach ($data as $value) {
+					if($value['status'] == 0){
+						$text = "No Airway Bill <b>".$value['airwaybill']."</b> <br>Pengiriman Sedang di Packing ";
+					} else if ($value['status'] == 1) {
+						$text = "No Airway Bill  <b>".$value['airwaybill']."</b> <br> Pengiriman Sedang di Dalam Perjalanan ";
+					} else {
+						$text = "No Airway Bill  <b>".$value['airwaybill']."</b> <br> Pengiriman Telah Sampai ";
+					}
+					$output .= '
+				<div class="dropdown-divider"></div>
+				<a href=' . base_url() . "administrator/pengiriman/detail?id=$value[id_pengiriman]" . ' class="dropdown-item">
+					<i>'.$text.'</i> 
+				</a>';
+				}
+			} else {
+				$output .= '
+				<li><a href="#" class="text-bold text-italic">Notification Not Found</a></li>';
+			}
+			$count = $this->db->query("select count(id) as count from status_log where is_read = 0")->result_array();
+			$data = array(
+				'notification' => $output,
+				'unseen_notification'  => $count[0]['count']
+			);
+			echo json_encode($data);
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
+	}
 }

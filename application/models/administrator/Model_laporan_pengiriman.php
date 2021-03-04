@@ -10,6 +10,11 @@ class Model_laporan_pengiriman extends CI_model
         return $this->db->get($table);
     }
 
+	public function getAllStatus($awal, $akhir)
+    {
+        return $this->db->get($table);
+    }
+
     public function viewWhereOrdering($table, $data, $order, $ordering)
     {
         $this->db->where($data);

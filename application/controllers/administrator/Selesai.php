@@ -102,9 +102,15 @@ class Selesai extends CI_Controller
 					'createdBy'	=> $this->session->userdata('name'),
 					'keterangan'	=> 'Packing Telah selesai, barang sedang dalam proses pengiriman'
 				);
-				$status = 2;
-				$action = $this->model_selesai->insert($data, 'pengiriman_detail_transport');
 				$status = 1;
+				$action = $this->model_selesai->insert($data, 'pengiriman_detail_transport');
+				$statuslog = array(
+					'id_pengiriman'  => $this->input->post('id'),
+					'status'	=> 1,
+					'is_read'	=> 0,
+					'createdAt' => date('Y-m-d H:i:s'),
+				);
+				$this->model_selesai->insert($statuslog, 'status_log');
 			} else if ($status[0]['keterangan'] == 1) {
 				$data = array(
 					'id_pengiriman'  => $this->input->post('id'),
@@ -115,7 +121,16 @@ class Selesai extends CI_Controller
 				);
 				$status = 2;
 				$action = $this->model_selesai->insert($data, 'pengiriman_detail_transport');
+				$this->model_selesai->updateWaktu($this->input->post('id'), 'pengiriman');
+				$statuslog = array(
+					'id_pengiriman'  => $this->input->post('id'),
+					'status'	=> 2,
+					'is_read'	=> 0,
+					'createdAt' => date('Y-m-d H:i:s'),
+				);
+				$this->model_selesai->insert($statuslog, 'status_log');
 			}
+		
 			$action = $this->model_selesai->updateStatus($this->input->post('id'), 'pengiriman', $status);
 			echo json_encode($action);
 		} else {

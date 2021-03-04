@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class LaporanPengiriman extends CI_Controller
 {
 	function __construct()
@@ -75,44 +79,72 @@ class LaporanPengiriman extends CI_Controller
 		}
 	}
 
-    public function delete()
-    {
-        if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+	public function delete()
+	{
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 
-            $data_id = array(
-                'id'  => $this->input->post('id')
-            );
-            $action = $this->model_laporan_pengiriman->delete($data_id, 'agent');
-            echo json_encode($action);
-        } else {
-            $this->load->view('pageadmin/login'); //Memanggil function render_view
-        }
-    }
+			$data_id = array(
+				'id'  => $this->input->post('id')
+			);
+			$action = $this->model_laporan_pengiriman->delete($data_id, 'agent');
+			echo json_encode($action);
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
+	}
 
 
-    public function simpan()
-    {
-        if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+	public function simpan()
+	{
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 
-            $data = array(
-                'nama'  => $this->input->post('nama'),
+			$data = array(
+				'nama'  => $this->input->post('nama'),
 				'keterangan'  => $this->input->post('keterangan'),
 				'pj'  => $this->input->post('pj'),
 				'alamat'  => $this->input->post('alamat'),
 				'telp'  => $this->input->post('telp'),
 				'createdAt' => date('Y-m-d H:i:s'),
 				'createdBy'	=> $this->session->userdata('name')
-            );
-			$cek = $this->model_laporan_pengiriman->checkDuplicate($data,'agent');
-			if($cek > 0){
+			);
+			$cek = $this->model_laporan_pengiriman->checkDuplicate($data, 'agent');
+			if ($cek > 0) {
 				echo json_encode(401);
 			} else {
 				$action = $this->model_laporan_pengiriman->insert($data, 'agent');
 				echo json_encode($action);
 			}
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
+	}
 
-        } else {
-            $this->load->view('pageadmin/login'); //Memanggil function render_view
-        }
-    }
+	public function laporanpengiriman()
+	{
+		// if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+		$awal = $this->input->post('awal');
+		$akhir = $this->input->post('akhir');
+		$status = $this->input->post('status');
+		if($status == 10){
+			$data = $this->model_laporan_pengiriman->getAllStatus($awal, $akhir)->result_array();
+		} else {
+			$data = $this->model_laporan_pengiriman->getByStatus($awal, $akhir, $status)->result_array();
+		}
+
+		$spreadsheet = new Spreadsheet();
+
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'No');
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="GeneratedFile.xlsx"');
+		header('Cache-Control: max-age=0');
+		
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
+		
+		// } else {
+		// 	$this->load->view('pageadmin/login'); //Memanggil function render_view
+		// }
+	}
 }

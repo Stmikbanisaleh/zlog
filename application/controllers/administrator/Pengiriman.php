@@ -180,14 +180,13 @@ class Pengiriman extends CI_Controller
 		
 			$action = $this->model_pengiriman->insert($data, 'pengiriman');
 			$id_pengiriman = $this->db->insert_id();
-			// $datapengirimandetail = array(
-			// 	'id_pengiriman'  => $id_pengiriman,
-			// 	'waktu_update'	=> date('Y-m-d H:i:s'),
-			// 	'createdAt' => date('Y-m-d H:i:s'),
-			// 	'keterangan'	=> $this->input->post('keterangan2'),
-			// 	'createdBy'	=> $this->session->userdata('name')
-			// );
-			// $this->model_pengiriman->insert($datapengirimandetail, 'pengiriman_detail_transport');
+			$statuslog = array(
+				'id_pengiriman'  => $id_pengiriman,
+				'status'	=> 0,
+				'is_read'	=> 0,
+				'createdAt' => date('Y-m-d H:i:s'),
+			);
+			$this->model_pengiriman->insert($statuslog, 'status_log');
 			echo json_encode($action);
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view

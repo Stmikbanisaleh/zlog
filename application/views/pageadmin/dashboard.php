@@ -144,8 +144,8 @@
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer clearfix">
-									<a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-									<a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+									<a href="<?php echo base_url() . '/administrator/pengiriman'; ?>" class="btn btn-sm btn-info float-left">Place New Order</a>
+									<a href="<?php echo base_url() . '/administrator/pengiriman'; ?>" class="btn btn-sm btn-secondary float-right">View All </a>
 								</div>
 								<!-- /.card-footer -->
 							</div>

@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Biayakg extends CI_Controller
+class Kategorigoods extends CI_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('administrator/model_biayakg');
+		$this->load->model('administrator/model_kategori_goods');
 	}
 
 	function render_view($data)
@@ -19,9 +19,9 @@ class Biayakg extends CI_Controller
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 			$data = array(
-				'page_content'      => '../pageadmin/biayakg/view',
-				'ribbon'            => '<li class="active">Konfigurasi Biaya Kg </li>',
-				'page_name'         => 'Konfigurasi Biaya Kg',
+				'page_content'      => '../pageadmin/kategorigoods/view',
+				'ribbon'            => '<li class="active">Master Kategori Goods</li>',
+				'page_name'         => 'Master Kategori Goods',
 			);
 			$this->render_view($data); //Memanggil function render_view
 		} else {
@@ -32,7 +32,7 @@ class Biayakg extends CI_Controller
 	public function tampil()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
-			$my_data = $this->model_biayakg->viewCustom('biaya_kg', 'id', 'desc')->result_array();
+			$my_data = $this->model_kategori_goods->viewOrdering('kategorigoods', 'id', 'desc')->result_array();
 			echo json_encode($my_data);
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
@@ -46,11 +46,12 @@ class Biayakg extends CI_Controller
 				'id'  => $this->input->post('e_id')
 			);
 			$data = array(
-				'harga'  => $this->input->post('e_harga_v'),
+				'nama'  => $this->input->post('e_nama'),
+				'keterangan'  => $this->input->post('e_keterangan'),
 				'updatedAt' => date('Y-m-d H:i:s'),
 				'updatedBy' => $this->session->userdata('name'),
 			);
-			$action = $this->model_biayakg->update($data_id, $data, 'biaya_kg');
+			$action = $this->model_kategori_goods->update($data_id, $data, 'kategorigoods');
 			echo json_encode($action);
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
@@ -64,7 +65,7 @@ class Biayakg extends CI_Controller
 			$data = array(
 				'id'  => $this->input->post('id'),
 			);
-			$my_data = $this->model_biayakg->viewWhere('biaya_kg', $data)->result();
+			$my_data = $this->model_kategori_goods->viewWhere('kategorigoods', $data)->result();
 			echo json_encode($my_data);
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
@@ -78,7 +79,7 @@ class Biayakg extends CI_Controller
             $data_id = array(
                 'id'  => $this->input->post('id')
             );
-            $action = $this->model_biayakg->delete($data_id, 'biaya_kg');
+            $action = $this->model_kategori_goods->delete($data_id, 'kategorigoods');
             echo json_encode($action);
         } else {
             $this->load->view('pageadmin/login'); //Memanggil function render_view
@@ -93,17 +94,14 @@ class Biayakg extends CI_Controller
             $data = array(
                 'nama'  => $this->input->post('nama'),
 				'keterangan'  => $this->input->post('keterangan'),
-				'pj'  => $this->input->post('pj'),
-				'alamat'  => $this->input->post('alamat'),
-				'telp'  => $this->input->post('telp'),
 				'createdAt' => date('Y-m-d H:i:s'),
 				'createdBy'	=> $this->session->userdata('name')
             );
-			$cek = $this->model_biayakg->checkDuplicate($data,'biaya_kg');
+			$cek = $this->model_kategori_goods->checkDuplicate($data,'kategorigoods');
 			if($cek > 0){
 				echo json_encode(401);
 			} else {
-				$action = $this->model_biayakg->insert($data, 'biaya_kg');
+				$action = $this->model_kategori_goods->insert($data, 'kategorigoods');
 				echo json_encode($action);
 			}
 

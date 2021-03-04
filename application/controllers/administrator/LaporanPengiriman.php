@@ -20,8 +20,8 @@ class LaporanPengiriman extends CI_Controller
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 			$data = array(
 				'page_content'      => '../pageadmin/laporan/view',
-				'ribbon'            => '<li class="active">Agent </li>',
-				'page_name'         => 'Agent',
+				'ribbon'            => '<li class="active">Laporan Pengiriman </li>',
+				'page_name'         => 'Laporan Pengiriman',
 			);
 			$this->render_view($data); //Memanggil function render_view
 		} else {

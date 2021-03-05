@@ -544,6 +544,9 @@
 						status +
 						'</td>' +
 						'<td class="project-actions text-right">' +
+						'   <button  class="btn btn-secondary btn-sm"  data-id="' + data[i].id + '">' +
+						'      <a href="<?php echo base_url('administrator/pengiriman/print/') ?>'+data[i].id+'" class="text-light" target="_blank"> <i class="fas fa-print"> </i>  Print </a>' +
+						'</button> &nbsp' +
 						'   <button  class="btn btn-info btn-sm item_detail"  data-id="' + data[i].id + '">' +
 						'      <i class="fas fa-eye"> </i>  Detail </a>' +
 						'</button> &nbsp' +

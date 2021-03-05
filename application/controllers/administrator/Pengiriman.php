@@ -214,44 +214,31 @@ class Pengiriman extends CI_Controller
 		}
 	}
 
-	public function print2()
+	public function print()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
-			ob_start();
-			$this->load->view('pageadmin/pengiriman/print');
-			$html = ob_get_contents();
-			ob_end_clean();
-				
-			require './assets/html2pdf/autoload.php';
 			
-			$pdf  = new Spipu\Html2Pdf\Html2Pdf('L', array(500,105), 'en', true, 'UTF-8', array(0, 0, 0, 0));
-			$pdf->WriteHTML($html);
-			$pdf->Output('Data Siswa.pdf', 'D');
+			// panggil library yang kita buat sebelumnya yang bernama pdfgenerator
+			$this->load->library('pdfgenerator');
+			
+			// title dari pdf
+			$this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
+			
+			// filename dari pdf ketika didownload
+			$file_pdf = 'laporan_penjualan_toko_kita';
+			// setting paper
+			//28.35 = 1
+			$paper = array(0,0,595,420);
+			//orientasi paper potrait / landscape
+			$orientation = "portrait";
+			
+			$html = $this->load->view('pageadmin/pengiriman/print',$this->data, true);	    
+			
+			// run dompdf
+			$this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
 	
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
 		}
 	}
-
-	public function print()
-    {
-        // panggil library yang kita buat sebelumnya yang bernama pdfgenerator
-        $this->load->library('pdfgenerator');
-        
-        // title dari pdf
-        $this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
-        
-        // filename dari pdf ketika didownload
-        $file_pdf = 'laporan_penjualan_toko_kita';
-        // setting paper
-		//28.35 = 1
-        $paper = array(0,0,595,420);
-        //orientasi paper potrait / landscape
-        $orientation = "portrait";
-        
-		$html = $this->load->view('pageadmin/pengiriman/print',$this->data, true);	    
-        
-        // run dompdf
-        $this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
-    }
 }

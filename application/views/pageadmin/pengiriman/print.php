@@ -127,7 +127,7 @@
                 <tr>
                     <td style="width: 70px;">Penerima</td>
                     <td style="width: 3px;">:</td>
-                    <td style="width: 100px;"></td>
+                    <td style="width: 100px;"> </td>
                     <td style="width: 15px;"> </td>
                     <td style="width: 70px;">Kode Pos</td>
                     <td style="width: 3px;">:</td>
@@ -327,7 +327,7 @@
             </tr>
             <tr>
                 <td style="text-align: center;">( AGEN ANDRA ASTRO JAYA )</td>
-                <td style="text-align: center;">Pengirim</td>
+                <td style="text-align: center;">(.......................)</td>
             </tr>
             <tr>
                 <td style="padding-left: 20px;">20-JAN-2021 01:00</td>

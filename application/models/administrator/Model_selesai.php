@@ -63,8 +63,15 @@ class Model_selesai extends CI_model
 
 	function updateStatus($id, $table, $status)
     {
-        return $this->db->query("update $table set keterangan = $status where id = $id");
+			return $this->db->query("update $table set keterangan = $status where id = $id");
     }
+
+	function updateWaktu($id, $table)
+    {
+			$now = date('Y-m-d');
+			return $this->db->query("update $table set tgl_selesai = '$now' where id = $id");
+    }
+
 
 	function getPrevStatus($id)
     {

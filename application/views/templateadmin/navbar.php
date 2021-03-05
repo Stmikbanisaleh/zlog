@@ -24,6 +24,15 @@
 
  	<!-- Right navbar links -->
  	<ul class="navbar-nav ml-auto">
+ 		<!-- Notifications Dropdown Menu -->
+ 		<li class="nav-item dropdown">
+ 			<a class="nav-link" data-toggle="dropdown" href="#">
+ 				<i class="far fa-bell"></i>
+ 				<span class="badge badge-danger navbar-badge count"></span>
+ 			</a>
+ 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right notif">
+ 			</div>
+ 		</li>
  		<li class="nav-item dropdown">
  			<a class="nav-link" data-toggle="dropdown" href="#">
  				<i class="far fa-user-circle"></i> Profile
@@ -114,7 +123,7 @@
  							swalEditSuccess();
  							$('#modalPassword').modal('hide');
  						} else if (response == 400) {
-							passwordNotMatch();
+ 							passwordNotMatch();
  						} else {
  							swalEditFailed();
  						}
@@ -123,4 +132,36 @@
  			}
  		})
  	}
+
+ 	$(document).ready(function() {
+ 		function load_unseen_notification(view = '') {
+ 			$.ajax({
+ 				url:  "<?php echo base_url('administrator/customer/notification') ?>",
+ 				method: "POST",
+ 				data: {
+ 					view: view
+ 				},
+ 				dataType: "json",
+ 				success: function(data) {
+ 					$('.notif').html(data.notification);
+ 					if (data.unseen_notification > 0) {
+ 						// $('.count').html(data.unseen_notification);
+ 						$('.count').html('');
+
+ 					}
+ 				}
+ 			});
+ 		}
+ 		load_unseen_notification();
+
+ 		$(document).on('click', '.nav-item dropdown', function() {
+ 			$('.count').html('');
+ 			load_unseen_notification('yes');
+ 		});
+
+ 		setInterval(function() {
+ 			load_unseen_notification();;
+ 		}, 50000);
+
+ 	});
  </script>

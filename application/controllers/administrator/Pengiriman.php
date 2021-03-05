@@ -214,7 +214,7 @@ class Pengiriman extends CI_Controller
 		}
 	}
 
-	public function print()
+	public function print2()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 			ob_start();
@@ -233,7 +233,7 @@ class Pengiriman extends CI_Controller
 		}
 	}
 
-	public function print2()
+	public function print()
     {
         // panggil library yang kita buat sebelumnya yang bernama pdfgenerator
         $this->load->library('pdfgenerator');

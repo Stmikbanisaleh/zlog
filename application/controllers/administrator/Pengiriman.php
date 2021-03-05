@@ -214,7 +214,7 @@ class Pengiriman extends CI_Controller
 		}
 	}
 
-	public function print()
+	public function print($id)
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 			
@@ -222,10 +222,12 @@ class Pengiriman extends CI_Controller
 			$this->load->library('pdfgenerator');
 			
 			// title dari pdf
-			$this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
+			$this->data['title_pdf'] = 'Laporan HWB';
+			$this->data['profile']	= $this->model_pengiriman->viewProfile()->row();
+			$this->data['pengiriman']	= $this->model_pengiriman->viewPengiriman($id)->row();
 			
 			// filename dari pdf ketika didownload
-			$file_pdf = 'laporan_penjualan_toko_kita';
+			$file_pdf = 'Print HWB';
 			// setting paper
 			//28.35 = 1
 			$paper = array(0,0,595,420);

@@ -40,6 +40,35 @@ class Model_pengiriman extends CI_model
 		order by a.createdAt desc");
     }
 
+    public function viewProfile(){
+        return $this->db->query("SELECT * FROM profile p LIMIT 1");
+    }
+
+    public function viewPengiriman($id){
+        return $this->db->query("SELECT
+                                    p.airwaybill,
+                                    p.nomor,
+                                    p.tgl_pengiriman,
+                                    p.tgl_selesai,
+                                    p.tgl_estimasi,
+                                    d.nama as driver,
+                                    a.nama agent,
+                                    a.alamat alamat_agent,
+                                    a.telp,
+                                    a.pj,
+                                    a.kodepos,
+                                    e.nama jalur
+                                FROM
+                                pengiriman p,
+                                agent a,
+                                ekspedisi e,
+                                driver d
+                                WHERE p.agent = a.id
+                                AND e.id = p.jalur
+                                AND p.driver = d.id
+                                AND p.id = $id");
+    }
+
 	
     public function viewOrdering($table, $order, $ordering)
     {

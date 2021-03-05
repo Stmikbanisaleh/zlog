@@ -67,11 +67,11 @@
             <img src="<?= base_url('assets/file/website/icon.png') ?>" alt="" style="width: 50px;">
         </div>
         <div class="kop-address">
-            JNE BEKASI <br>
-            RUKO KRANJI PLAZA<br>
-            JL. JEND SUDIRMAN NO. 6 <br>
-            BEKASI<br>
-            Telp. 085715055622
+            <b><?= strtoupper($profile->nama_perusahaan); ?></b> <br>
+            <?= strtoupper($profile->nama_jalan); ?><br>
+            <?= strtoupper($profile->kecamatan); ?> <br>
+            <?= strtoupper($profile->kabupaten); ?><br>
+            Telp. <?= strtoupper($profile->no_telp1); ?>
         </div>
         <div class="content">
 
@@ -79,20 +79,20 @@
                 <tr>
                     <td style="width: 70px;">Kota Asal</td>
                     <td style="width: 3px;">:</td>
-                    <td style="width: 100px;">BK001222</td>
+                    <td style="width: 100px;"><?= $profile->kabupaten; ?></td>
                     <td style="width: 15px;"> </td>
                     <td style="width: 70px;">Kota Tujuan</td>
                     <td style="width: 3px;">:</td>
-                    <td style="max-width: 100px;">PAPUA NEW GUINEA</td>
+                    <td style="max-width: 100px;"> </td>
                 </tr>
                 <tr>
                     <td>No Pelanggan</td>
                     <td>:</td>
-                    <td>P001D2345</td>
+                    <td><?= $pengiriman->nomor; ?></td>
                     <td> </td>
                     <td>Pembayaran</td>
                     <td>:</td>
-                    <td>CASH</td>
+                    <td> </td>
                 </tr>
                 <tr style="height: 10px;">
                     <td> </td>
@@ -104,22 +104,25 @@
                     <td> </td>
                     <td>Kode Pos</td>
                     <td>:</td>
-                    <td>43272</td>
+                    <td><?= strtoupper($profile->kode_pos); ?></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><b>Denda Andayani</b></td>
+                    <td colspan="3"><b><?= strtoupper($profile->nama_perusahaan); ?></b></td>
                     <td></td>
                     <td>Telp</td>
                     <td>:</td>
-                    <td>0857121218871</td>
+                    <td><?= strtoupper($profile->no_telp1); ?></td>
                 </tr>
                 <tr>
-                    <td colspan="7" rowspan="3">Jl. Mayor Madmuin Hasibuan No.68, RT.004/RW.004, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113</td>
+                    <td colspan="7" rowspan="3">
+            <?= $profile->nama_jalan.", " ?><br>
+            <?= $profile->kecamatan.", "; ?> <br>
+            <?= $profile->kabupaten; ?><br></td>
                 </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
-                    <td colspan="7" rowspan="3">BEKASI - INDONESIA</td>
+                    <td colspan="7" rowspan="3">INDONESIA</td>
                 </tr>
             </table>
 
@@ -131,35 +134,40 @@
                     <td style="width: 15px;"> </td>
                     <td style="width: 70px;">Kode Pos</td>
                     <td style="width: 3px;">:</td>
-                    <td style="max-width: 100px;">441122</td>
+                    <td style="max-width: 100px;"><?= $pengiriman->kodepos; ?></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><b>Dedi Prasetio Al Ghazali</b></td>
+                    <td colspan="3"><b><?= $pengiriman->agent; ?></b></td>
                     <td></td>
                     <td>Telp</td>
                     <td>:</td>
-                    <td>0857121218871</td>
+                    <td><?= $pengiriman->telp; ?></td>
                 </tr>
                 <tr>
-                    <td colspan="7" rowspan="3">Jl. Mayor Madmuin Hasibuan No.68, RT.004/RW.004, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113</td>
+                    <td colspan="7" rowspan="3"><?= $pengiriman->alamat_agent; ?>, <?= $pengiriman->kodepos; ?></td>
                 </tr>
                 <tr></tr>
                 <tr></tr>
                 <tr>
-                    <td colspan="7" rowspan="3">YOGYAKARTA - INDONESIA</td>
+                    <td colspan="7" rowspan="3">INDONESIA</td>
                 </tr>
             </table>
 
             <table style="margin-bottom: 20px;">
                 <tr>
-                    <td style="width: 70px;">Adm</td>
+                    <td style="width: 70px;">Tgl pengiriman</td>
                     <td style="width: 3px;">:</td>
-                    <td style="width: 150px;"> </td>
+                    <td style="width: 150px;"><?= $pengiriman->tgl_pengiriman; ?></td>
                 </tr>
                 <tr>
-                    <td>Instruksi Khusus</td>
+                    <td>Tgl estiimasi</td>
                     <td>:</td>
-                    <td> </td>
+                    <td"><?= $pengiriman->tgl_estimasi; ?></td>
+                </tr>
+                <tr>
+                    <td>Tgl selesai</td>
+                    <td>:</td>
+                    <td><?= $pengiriman->tgl_selesai; ?></td>
                 </tr>
                 <tr>
                     <td>Catatan</td>
@@ -170,11 +178,6 @@
                     <td>Nilai Barang</td>
                     <td>:</td>
                     <td> </td>
-                </tr>
-                <tr>
-                    <td>Keterangan Barang</td>
-                    <td>:</td>
-                    <td">VOOC</td>
                 </tr>
                 <tr style="height: 20px;">
                     <td> </td>

@@ -127,7 +127,7 @@
                 <tr>
                     <td style="width: 70px;">Penerima</td>
                     <td style="width: 3px;">:</td>
-                    <td style="width: 100px;"></td>
+                    <td style="width: 100px;"> </td>
                     <td style="width: 15px;"> </td>
                     <td style="width: 70px;">Kode Pos</td>
                     <td style="width: 3px;">:</td>
@@ -154,37 +154,41 @@
                 <tr>
                     <td style="width: 70px;">Adm</td>
                     <td style="width: 3px;">:</td>
-                    <td style="width: 300px;"> </td>
+                    <td style="width: 150px;"> </td>
                 </tr>
                 <tr>
-                    <td style="width: 70px;">Instruksi Khusus</td>
-                    <td style="width: 3px;">:</td>
-                    <td style="width: 300px;"> </td>
+                    <td>Instruksi Khusus</td>
+                    <td>:</td>
+                    <td> </td>
                 </tr>
                 <tr>
-                    <td style="width: 70px;">Catatan</td>
-                    <td style="width: 3px;">:</td>
-                    <td style="width: 300px;"> </td>
+                    <td>Catatan</td>
+                    <td>:</td>
+                    <td> </td>
                 </tr>
                 <tr>
-                    <td style="width: 70px;">Nilai Barang</td>
-                    <td style="width: 3px;">:</td>
-                    <td style="width: 300px;"> </td>
+                    <td>Nilai Barang</td>
+                    <td>:</td>
+                    <td> </td>
                 </tr>
                 <tr>
-                    <td style="width: 70px;">Keterangan Barang</td>
-                    <td style="width: 3px;">:</td>
-                    <td style="width: 300px;">VOOC</td>
+                    <td>Keterangan Barang</td>
+                    <td>:</td>
+                    <td">VOOC</td>
                 </tr>
-                <tr style="height: 4px;"> </tr>
-                <!-- <tr>
-                    <td colspan="3" style="text-align: center; font-size: 7px;"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <br>1500s, when an unknown printer</b></td>
-                </tr> -->
+                <tr style="height: 20px;">
+                    <td> </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center; font-size: 7px; padding-right: 15px; padding-top: 35px;"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <br>1500s, when an unknown printer</b></td>
+                </tr>
             </table>
             
         </div>
-    </div>
-    <div class="" style="height: 9.8cm; width:1px; background-color: #bdbfbe; position: fixed; margin-left: 9.8cm; margin-top: 30px;"></div>
+        </div>
+        <div class="" style="height: 12.7cm; width:1px; background-color: #bdbfbe; position: fixed; margin-left: 9.8cm; margin-top: 30px;"></div>
     <div class="layer2">
         <table style="width: 100%; margin-bottom: 15px;">
             <tr>
@@ -215,7 +219,7 @@
             </tr>
         </table>
 
-        <table margin-bottom: 40px;>
+        <table style="margin-bottom: 30px;">
             <tr>
                 <td rowspan="2" style="text-align: center;">Keterangan</td>
                 <td rowspan="2" style="text-align: center;">Jml</td>
@@ -239,36 +243,110 @@
             </tr>
         </table>
 
-        <table style="width: 100%;">
+        <table>
             <tr>
                 <td style="width: 70px;">Jumlah</td>
                 <td style="width: 5px;">:</td>
-                <td style="width: 200px;">1</td>
+                <td style="width: 160px;">1</td>
                 <td style="width: 50px;">Berat</td>
                 <td style="width: 5px;">:</td>
-                <td style="width: 30px; text-align: right;">1</td>
+                <td style="width: 28px; text-align: right;">1</td>
             </tr>
-            <!-- <tr>
-                <td style="width: 70px;">Biaya Kirim</td>
-                <td style="width: 30px;">: IDR</td>
+            <tr>
+                <td>Biaya Kirim</td>
+                <td>: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
             </tr>
             <tr>
-                <td style="width: 70px;">Biaya Lain-lain</td>
-                <td style="width: 30px;">: IDR</td>
+                <td>Biaya Lain-lain</td>
+                <td>: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
             </tr>
             <tr>
-                <td style="width: 70px;">Asuransi</td>
-                <td style="width: 30px;">: IDR</td>
+                <td>Asuransi</td>
+                <td>: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
             </tr>
             <tr>
-                <td style="width: 70px;">Adm Asuransi</td>
-                <td style="width: 30px;">: IDR</td>
+                <td>Adm Asuransi</td>
+                <td>: IDR</td>
+                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
             </tr> -->
         </table>
+        <hr style="border: 0.2px; margin-top: -15px;">
+
+        <table style="margin-top: 70px;">
+            <tr>
+                <td style="width: 170px; text-align: center;">Petugas</td>
+                <td style="width: 170px; text-align: center;">Ttd. Pengirim</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">( AGEN ANDRA ASTRO JAYA )</td>
+                <td style="text-align: center;">(.......................)</td>
+            </tr>
+            <tr>
+                <td style="padding-left: 20px;">20-JAN-2021 01:00</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="note" style="margin-top: 15px; font-size: 7px;">
+            Ketentuan berlaku**<br>
+            1. Tanggal dan tempat surat muatan udara dibuat. <br>
+            2. Tempat pemberangkatan dan tujuan.<br>
+            3. Nama dan alamat pengangkut pertama.<br>
+            4. Nama dan alamat pengirim kargo.<br>
+            5. Nama dan alamat penerima kargo.<br>
+            6. Jumlah, cara pembungkusan, tanda-tanda istimewa, atau nomor kargo yang ada.<br>
+            7. Jumlah, berat, ukuran, atau besarnya kargo.<br>
+            8. Jenis atau macam kargo yang dikirim.<br>
+            9. Pernyataan bahwa pengangkutan kargo ini tunduk pada ketentuan dalam undang-undang.<br>
+        </div>
     </div>
 </body>
 

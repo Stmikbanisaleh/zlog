@@ -43,18 +43,77 @@ class Customer extends CI_Controller
 
 	public function update()
 	{
-		$data_id = array(
-			'idsaldo'  => $this->input->post('e_id')
-		);
-		$data = array(
-			'TotalTagihan'  => $this->input->post('e_tot_tagihan_v'),
-			'Bayar'  => $this->input->post('e_bayar_v'),
-			'Sisa'  => $this->input->post('e_sisa_v'),
-			'tipe_generate'  => 'N',
-			'updatedAt' => date('Y-m-d H:i:s'),
-		);
-		$action = $this->model_customer->update($data_id, $data, 'user');
-		echo json_encode($action);
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+			$password = md5($this->input->post('e_password'));
+			$password = hash("sha512", $password);
+
+			$password2 = md5($this->input->post('e_passwordconfirm'));
+			$password2 = hash("sha512", $password2);
+
+			if ($password == $password2) {
+				$config['upload_path'] = './assets/file/profile';
+				$config['overwrite'] = TRUE;
+				$config['encrypt_name'] = TRUE;
+				$config["allowed_types"] = 'jpg|jpeg|png|gif|pdf';
+				$config["max_size"] = 4096;
+				$this->load->library('upload', $config);
+				$do_upload = $this->upload->do_upload("e_photo");
+				if ($do_upload) {
+					$upload_data = $this->upload->data();
+					$file_name = $upload_data['file_name'];
+					if($password == null || $password == "" || $password2 == null || $password2 == ""){
+						$data = array(
+							'name'  => $this->input->post('e_nama'),
+							'email'  => $this->input->post('e_email'),
+							'phone'  => $this->input->post('e_telp'),
+							'address'  => $this->input->post('e_alamat'),
+							'role_id'  => $this->input->post('e_role'),
+							'image' => $file_name,
+							'is_active'  => $this->input->post('e_is_active'),
+							'updatedAt' => date('Y-m-d H:i:s'),
+							'updatedBy'	=> $this->session->userdata('name')
+						);
+					} else {
+						$data = array(
+							'name'  => $this->input->post('e_nama'),
+							'email'  => $this->input->post('e_email'),
+							'phone'  => $this->input->post('e_telp'),
+							'address'  => $this->input->post('e_alamat'),
+							'role_id'  => $this->input->post('e_role'),
+							'image' => $file_name,
+							'is_active'  => $this->input->post('e_is_active'),
+							'password'  => $password,
+							'updatedAt' => date('Y-m-d H:i:s'),
+							'updatedBy'	=> $this->session->userdata('name')
+						);
+					}
+				
+				} else {
+					$data = array(
+						'name'  => $this->input->post('e_nama'),
+						'email'  => $this->input->post('e_email'),
+						'phone'  => $this->input->post('e_telp'),
+						'address'  => $this->input->post('e_alamat'),
+						'role_id'  => $this->input->post('role'),
+						'is_active'  => $this->input->post('e_is_active'),
+						'password'  => $password,
+						'createdAt' => date('Y-m-d H:i:s'),
+						'createdBy'	=> $this->session->userdata('name')
+					);
+				}
+				$cek = $this->model_customer->checkDuplicate($data, 'user');
+				if ($cek > 0) {
+					echo json_encode(401);
+				} else {
+					$action = $this->model_customer->insert($data, 'user');
+					echo json_encode($action);
+				}
+			} else {
+				echo json_encode(400);
+			}
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
 	}
 
 	public function tampil_byid()
@@ -187,17 +246,17 @@ class Customer extends CI_Controller
 
 			if ($data != null) {
 				foreach ($data as $value) {
-					if($value['status'] == 0){
-						$text = "No Airway Bill <b>".$value['airwaybill']."</b> <br>Pengiriman Sedang di Packing ";
+					if ($value['status'] == 0) {
+						$text = "No Airway Bill <b>" . $value['airwaybill'] . "</b> <br>Pengiriman Sedang di Packing ";
 					} else if ($value['status'] == 1) {
-						$text = "No Airway Bill  <b>".$value['airwaybill']."</b> <br> Pengiriman Sedang di Dalam Perjalanan ";
+						$text = "No Airway Bill  <b>" . $value['airwaybill'] . "</b> <br> Pengiriman Sedang di Dalam Perjalanan ";
 					} else {
-						$text = "No Airway Bill  <b>".$value['airwaybill']."</b> <br> Pengiriman Telah Sampai ";
+						$text = "No Airway Bill  <b>" . $value['airwaybill'] . "</b> <br> Pengiriman Telah Sampai ";
 					}
 					$output .= '
 				<div class="dropdown-divider"></div>
 				<a href=' . base_url() . "administrator/pengiriman/detail?id=$value[id_pengiriman]" . ' class="dropdown-item">
-					<i>'.$text.'</i> 
+					<i>' . $text . '</i> 
 				</a>';
 				}
 			} else {

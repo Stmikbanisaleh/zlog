@@ -222,9 +222,8 @@ class Pengiriman extends CI_Controller
 			$html = ob_get_contents();
 			ob_end_clean();
 				
-			require './assets/html2pdf/autoload.php';
 			
-			$pdf  = new Spipu\Html2Pdf\Html2Pdf('L', array(500,105), 'en', true, 'UTF-8', array(0, 0, 0, 0));
+			$pdf  = new Spipu\Html2Pdf\Html2Pdf('L', 'A4', 'en');
 			$pdf->WriteHTML($html);
 			$pdf->Output('Data Siswa.pdf', 'D');
 	

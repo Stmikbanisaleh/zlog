@@ -1,5 +1,5 @@
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar elevation-4 sidebar-light-primary "  >
   	<!-- Brand Logo -->
   	<a href="<?php echo base_url() . 'dashboard/index' ?>" class="brand-link">
   		<img src="<?= base_url() ?>assets/file/website/icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -23,8 +23,8 @@
   			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
   				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-  				<li class="nav-item has-treeview menu-open">
-  					<a href="<?php echo base_url() . 'dashboard/index' ?>" class="nav-link active">
+  				<li class="nav-item has-treeview menu-open" style="background-color:#509a7f ;">
+  					<a href="<?php echo base_url() . 'dashboard/index' ?>" class="nav-link active" style="background-color:#509a7f ;"> 
   						<i class="nav-icon fas fa-tachometer-alt"></i>
   						<p>
   							Dashboard

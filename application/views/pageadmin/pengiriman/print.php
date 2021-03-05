@@ -215,7 +215,7 @@
             </tr>
         </table>
 
-        <table margin-bottom: 40px;">
+        <table margin-bottom: 40px;>
             <tr>
                 <td rowspan="2" style="text-align: center;">Keterangan</td>
                 <td rowspan="2" style="text-align: center;">Jml</td>
@@ -248,7 +248,7 @@
                 <td style="width: 5px;">:</td>
                 <td style="width: 30px; text-align: right;">1</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td style="width: 70px;">Biaya Kirim</td>
                 <td style="width: 30px;">: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
@@ -267,7 +267,7 @@
                 <td style="width: 70px;">Adm Asuransi</td>
                 <td style="width: 30px;">: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr>
+            </tr> -->
         </table>
     </div>
 </body>

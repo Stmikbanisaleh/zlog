@@ -12,7 +12,18 @@ class Model_laporan_pengiriman extends CI_model
 
 	public function getAllStatus($awal, $akhir)
     {
-        return $this->db->get($table);
+        return $this->db->query("Select a.airwaybill , a.nomor ,b.nama as driver , a.tgl_pengiriman, a.tgl_estimasi,a.tgl_selesai , a.keterangan,d.nama as agent, c.nama as jalur from pengiriman a
+		join driver b on a.driver = b.id
+		join ekspedisi c on a.jalur = c.id  
+		join agent d on a.agent = d.id where a.createdAt between '$awal' and '$akhir'");
+    }
+
+	public function getByStatus($awal, $akhir, $status)
+    {
+        return $this->db->query("Select a.airwaybill , a.nomor ,b.nama as driver , a.tgl_pengiriman, a.tgl_estimasi,a.tgl_selesai , a.keterangan,d.nama as agent, c.nama as jalur from pengiriman a
+		join driver b on a.driver = b.id
+		join ekspedisi c on a.jalur = c.id  
+		join agent d on a.agent = d.id where a.createdAt between '$awal' and '$akhir' and a.keterangan = $status ");
     }
 
     public function viewWhereOrdering($table, $data, $order, $ordering)

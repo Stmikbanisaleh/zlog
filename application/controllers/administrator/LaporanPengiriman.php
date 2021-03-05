@@ -125,24 +125,66 @@ class LaporanPengiriman extends CI_Controller
 		$awal = $this->input->post('awal');
 		$akhir = $this->input->post('akhir');
 		$status = $this->input->post('status');
-		if($status == 10){
+		$filename= "Laporan_pengiriman_periode-$awal sampai $akhir.xlsx";
+		if ($status == 10) {
 			$data = $this->model_laporan_pengiriman->getAllStatus($awal, $akhir)->result_array();
 		} else {
 			$data = $this->model_laporan_pengiriman->getByStatus($awal, $akhir, $status)->result_array();
 		}
+		if ($data != null) {
+			$spreadsheet = new Spreadsheet();
+			$sheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('A1', 'No');
+			$sheet->setCellValue('B1', 'AirwayBill');
+			$sheet->setCellValue('C1', 'Nomor Surat Jalan');
+			$sheet->setCellValue('D1', 'Driver');
+			$sheet->setCellValue('E1', 'Tujuan');
+			$sheet->setCellValue('F1', 'Tanggal Pengiriman');
+			$sheet->setCellValue('G1', 'Tanggal Estimasi');
+			$sheet->setCellValue('H1', 'Tanggal Selesai Pengiriman');
+			$sheet->setCellValue('I1', 'Status Pengiriman');
+			$sheet->setCellValue('J1', 'Jalur Pengiriman');
+			$no = 1;
+			$x = 2;
+			foreach($data as $value){
+				if($value['keterangan'] == 0){
+					$kalimat = "Proses Packing";
+				}else if ($value['keterangan'] == 1){
+					$kalimat = "Dalam Proses Pengiriman";
+				} else {
+					$kalimat = "Selesai";
+				}
+				$sheet->setCellValue('A'.$x, $no++);
+				$sheet->setCellValue('B'.$x, $value['airwaybill']);
+				$sheet->setCellValue('C'.$x, $value['nomor']);
+				$sheet->setCellValue('D'.$x, $value['driver']);
+				$sheet->setCellValue('E'.$x, $value['agent']);
+				$sheet->setCellValue('F'.$x, $value['tgl_pengiriman']);
+				$sheet->setCellValue('G'.$x, $value['tgl_estimasi']);
+				$sheet->setCellValue('H'.$x, $value['tgl_selesai']);
+				$sheet->setCellValue('I'.$x, $kalimat);
+				$sheet->setCellValue('J'.$x, $value['jalur']);
+				$x++;
+			}
 
-		$spreadsheet = new Spreadsheet();
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename='.$filename.'');
+			header('Cache-Control: max-age=0');
 
-		$sheet = $spreadsheet->getActiveSheet();
-		$sheet->setCellValue('A1', 'No');
-		
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="GeneratedFile.xlsx"');
-		header('Cache-Control: max-age=0');
-		
-		$writer = new Xlsx($spreadsheet);
-		$writer->save('php://output');
-		
+			$writer = new Xlsx($spreadsheet);
+			$writer->save('php://output');
+		} else {
+			$spreadsheet = new Spreadsheet();
+			$sheet = $spreadsheet->getActiveSheet();
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="GeneratedFile.xlsx"');
+			header('Cache-Control: max-age=0');
+	
+			$writer = new Xlsx($spreadsheet);
+			$writer->save('php://output');
+		}
+	
+
 		// } else {
 		// 	$this->load->view('pageadmin/login'); //Memanggil function render_view
 		// }

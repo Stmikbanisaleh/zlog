@@ -23,7 +23,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 								</div>
-								<input type="email" id="email" name="email" class="form-control" placeholder="Email">
+								<input  required type="email" id="email" name="email" class="form-control" placeholder="Email">
 							</div>
 
 							<div class="form-group">
@@ -31,7 +31,7 @@
 								<select required class="form-control select2" style="width: 100%;" name="role" id="role">
 									<option value="" selected="selected">-- Pilih --</option>
 									<?php foreach ($myrole as $value) { ?>
-										<option value=<?= $value['id'] ?>><?=  $value['nama'] ?></option>
+										<option value=<?= $value['id'] ?>><?= $value['nama'] ?></option>
 									<?php } ?>
 								</select>
 							</div>
@@ -47,14 +47,14 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-key"></i></span>
 								</div>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Password">
+								<input required type="password" id="password" name="password" class="form-control" placeholder="Password">
 							</div>
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-key"></i></span>
 								</div>
-								<input type="password" id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="Password Confirm">
+								<input required type="password" id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="Password Confirm">
 							</div>
 
 							<div class="form-group">
@@ -86,6 +86,92 @@
 		</div><!-- /.modal-dialog -->
 	</div>
 
+	<div id="modalEdit" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form class="form-horizontal" role="form" id="formEdit">
+					<div class="card card-info">
+						<div class="modal-header">
+							<h4 class="modal-title">Edit User</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="card-body">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input required type="hidden" id="e_id" name="e_id" >
+								<input required type="text" id="e_nama" name="e_nama" class="form-control" placeholder="Nama User">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+								</div>
+								<input required type="email" id="e_email" name="e_email" class="form-control" placeholder="Email">
+							</div>
+
+							<div class="form-group">
+								<label>Role User</label>
+								<select required class="form-control select2" style="width: 100%;" name="e_role" id="e_role">
+									<option value="" selected="selected">-- Pilih --</option>
+									<?php foreach ($myrole as $value) { ?>
+										<option value=<?= $value['id'] ?>><?= $value['nama'] ?></option>
+									<?php } ?>
+								</select>
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-phone"></i></span>
+								</div>
+								<input type="number" id="e_telp" name="e_telp" class="form-control" placeholder="No Telepon">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input required type="password" id="e_password" name="e_password" class="form-control" placeholder="Password (Kosongkan Jika tidak dirubah)">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" id="e_passwordconfirm" name="e_passwordconfirm" class="form-control" placeholder="Password Confirm (Kosongkan Jika tidak dirubah)">
+							</div>
+
+							<div class="form-group">
+								<label>Foto</label>
+								<input type="file" id="e_photo" name="e_photo" class="form-control" placeholder="Password Confirm">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-home"></i></span>
+								</div>
+								<textarea type="text" id="e_alamat" name="e_alamat" class="form-control" placeholder="Alamat"></textarea>
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<div class="modal-footer">
+						<button type="submit" id="btn_import" class="btn btn-sm btn-success pull-left">
+							<i class="ace-icon fa fa-save"></i>
+							Simpan
+						</button>
+						<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+							<i class="ace-icon fa fa-times"></i>
+							Batal
+						</button>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
 	<!-- Default box -->
 
 	<div class="card">
@@ -94,8 +180,7 @@
 		</div>
 		<br>
 		<div class="col-sm-2">
-			<button href="#modalTambah" type="button" role="button" data-toggle="modal" 
-			class="btn btn-block btn-primary"><a class="ace-icon fa fa-plus bigger-120"></a> Add User</button>
+			<button href="#modalTambah" type="button" role="button" data-toggle="modal" class="btn btn-block btn-primary"><a class="ace-icon fa fa-plus bigger-120"></a> Add User</button>
 		</div>
 		<br>
 		<div class="card-body p-0">
@@ -108,7 +193,7 @@
 						<th class="text-center">
 							Nama
 						</th>
-						<th  class="text-center">
+						<th class="text-center">
 							Email
 						</th>
 						<th class="text-center">
@@ -117,7 +202,7 @@
 						<th class="text-center">
 							Role
 						</th>
-						<th  class="text-center">
+						<th class="text-center">
 							Status
 						</th>
 						<th style="width:16%" class="text-center">
@@ -185,9 +270,9 @@
 							swalInputSuccess();
 							show_data();
 							$('#modalTambah').modal('hide');
-						} else if (response == 400){
+						} else if (response == 400) {
 							passwordNotMatch();
-						} else if(response == 401){
+						} else if (response == 401) {
 							swalIdDouble();
 						} else {
 							document.getElementById("formTambah").reset();
@@ -288,6 +373,31 @@
 
 		});
 	}
+
+	//get data for update record
+	$('#show_data').on('click', '.item_edit', function() {
+		document.getElementById("formEdit").reset();
+		var id = $(this).data('id');
+		$('#modalEdit').modal('show');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('administrator/customer/tampil_byid') ?>",
+			async: true,
+			dataType: "JSON",
+			data: {
+				id: id,
+			},
+			success: function(data) {
+				$('#e_id').val(data[0].id);
+				$('#e_nama').val(data[0].name);
+				$('#e_email').val(data[0].email);
+				$('#e_telp').val(data[0].phone);
+				$('#e_alamat').val(data[0].address);
+				$('#e_role').val(data[0].role_id).select2();
+
+			}
+		});
+	});
 
 	$(document).ready(function() {
 		$('.select2').select2();

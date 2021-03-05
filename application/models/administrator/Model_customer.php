@@ -28,6 +28,12 @@ class Model_customer extends CI_model
         return $this->db->get($table);
     }
 
+	public function viewWhere($table, $data)
+    {
+        $this->db->where($data);
+        return $this->db->get($table);
+	}
+
     public function view_where($table, $data)
     {
         $this->db->where($data);

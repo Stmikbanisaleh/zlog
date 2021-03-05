@@ -44,8 +44,8 @@
 	<script src="<?= base_url() ?>assets/adminlte/dist/js/adminlte.min.js"></script>
 	<script src="<?= base_url() ?>assets/adminlte/dist/js/jquery.validate.min.js"></script>
 	<!-- Dashboard data -->
-	<!-- <script src="<?= base_url() ?>assets/adminlte/plugins/chart.js/Chart.min.js"></script>
-	<script src="<?= base_url() ?>assets/adminlte/dist/js/pages/dashboard3.js"></script> -->
+	<script src="<?= base_url() ?>assets/adminlte/plugins/chart.js/Chart.min.js"></script>
+	<script src="<?= base_url() ?>assets/adminlte/dist/js/pages/dashboard3.js"></script>
 
 	<script src="<?= base_url() ?>assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
 	<style>

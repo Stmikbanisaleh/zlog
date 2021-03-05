@@ -134,7 +134,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-key"></i></span>
 								</div>
-								<input required type="password" id="e_password" name="e_password" class="form-control" placeholder="Password (Kosongkan Jika tidak dirubah)">
+								<input  type="password" id="e_password" name="e_password" class="form-control" placeholder="Password (Kosongkan Jika tidak dirubah)">
 							</div>
 
 							<div class="input-group mb-3">
@@ -142,6 +142,15 @@
 									<span class="input-group-text"><i class="fas fa-key"></i></span>
 								</div>
 								<input type="password" id="e_passwordconfirm" name="e_passwordconfirm" class="form-control" placeholder="Password Confirm (Kosongkan Jika tidak dirubah)">
+							</div>
+
+							<div class="form-group">
+								<label>Status</label>
+								<select required class="form-control select2" style="width: 100%;" name="e_is_active" id="e_is_active">
+									<option value="" selected="selected">-- Pilih --</option>
+									<option value="1" selected="selected">Active</option>
+									<option value="0" selected="selected">Disabled</option>
+								</select>
 							</div>
 
 							<div class="form-group">
@@ -286,6 +295,42 @@
 		})
 	}
 
+	if ($("#formEdit").length > 0) {
+		$("#formEdit").validate({
+			errorClass: "my-error-class",
+			validClass: "my-valid-class",
+			submitHandler: function(form) {
+				$('#btn_edit').html('Sending..');
+				formdata = new FormData(form);
+				$.ajax({
+					url: "<?php echo base_url('administrator/customer/update') ?>",
+					type: "POST",
+					data: formdata,
+					processData: false,
+					contentType: false,
+					cache: false,
+					async: false,
+					success: function(response) {
+						$('#btn_edit').html('<i class="ace-icon fa fa-save"></i>' +
+							'Ubah');
+						if (response == true) {
+							document.getElementById("formEdit").reset();
+							swalEditSuccess();
+							show_data();
+							$('#modalEdit').modal('hide');
+						} else if (response == 401) {
+							swalIdDouble();
+						} else {
+							swalInputSuccess();
+							show_data();
+							$('#modalEdit').modal('hide');
+						}
+					}
+				});
+			}
+		})
+	}
+
 	$('#show_data').on('click', '.item_hapus', function() {
 		var id = $(this).data('id');
 		Swal.fire({
@@ -343,7 +388,7 @@
 						'<td class="text-left">' + data[i].name + '</td>' +
 						'<td class="text-left">' + data[i].email + '</td>' +
 						'<td class="text-left">' + data[i].phone + '</td>' +
-						'<td class="text-left">Administrator</td>' +
+						'<td class="text-left">' + data[i].nama_role + '</td>' +
 
 						// '<td class="text-left">' + data[i].role_id + '</td>' +
 						status +
@@ -393,8 +438,8 @@
 				$('#e_email').val(data[0].email);
 				$('#e_telp').val(data[0].phone);
 				$('#e_alamat').val(data[0].address);
+				$('#e_is_active').val(data[0].is_active).select2();
 				$('#e_role').val(data[0].role_id).select2();
-
 			}
 		});
 	});

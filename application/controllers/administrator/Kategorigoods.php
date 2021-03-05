@@ -72,41 +72,35 @@ class Kategorigoods extends CI_Controller
 		}
 	}
 
-    public function delete()
-    {
-        if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+	public function delete()
+	{
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 
-            $data_id = array(
-                'id'  => $this->input->post('id')
-            );
-            $action = $this->model_kategori_goods->delete($data_id, 'kategorigoods');
-            echo json_encode($action);
-        } else {
-            $this->load->view('pageadmin/login'); //Memanggil function render_view
-        }
-    }
+			$data_id = array(
+				'id'  => $this->input->post('id')
+			);
+			$action = $this->model_kategori_goods->delete($data_id, 'kategorigoods');
+			echo json_encode($action);
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
+	}
 
 
-    public function simpan()
-    {
-        if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
+	public function simpan()
+	{
+		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 
-            $data = array(
-                'nama'  => $this->input->post('nama'),
+			$data = array(
+				'nama'  => $this->input->post('nama'),
 				'keterangan'  => $this->input->post('keterangan'),
 				'createdAt' => date('Y-m-d H:i:s'),
 				'createdBy'	=> $this->session->userdata('name')
-            );
-			$cek = $this->model_kategori_goods->checkDuplicate($data,'kategorigoods');
-			if($cek > 0){
-				echo json_encode(401);
-			} else {
-				$action = $this->model_kategori_goods->insert($data, 'kategorigoods');
-				echo json_encode($action);
-			}
-
-        } else {
-            $this->load->view('pageadmin/login'); //Memanggil function render_view
-        }
-    }
+			);
+			$action = $this->model_kategori_goods->insert($data, 'kategorigoods');
+			echo json_encode($action);
+		} else {
+			$this->load->view('pageadmin/login'); //Memanggil function render_view
+		}
+	}
 }

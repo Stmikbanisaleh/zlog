@@ -14,6 +14,11 @@ class Model_customer extends CI_model
         return $this->db->get($table);
     }
 
+	public function viewOrderingCustom($table, $order, $ordering)
+    {
+        return $this->db->query("select a.*,b.nama as nama_role from $table a join role b on a.role_id = b.id order by id desc");
+    }
+
 	public function checkDuplicate($data, $table)
     {
         $this->db->where('email',$data['email']);

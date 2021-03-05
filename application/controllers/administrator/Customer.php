@@ -34,7 +34,7 @@ class Customer extends CI_Controller
 	public function tampil()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
-			$my_data = $this->model_customer->viewOrdering('user', 'id', 'desc')->result_array();
+			$my_data = $this->model_customer->viewOrderingCustom('user', 'id', 'desc')->result_array();
 			echo json_encode($my_data);
 		} else {
 			$this->load->view('pageadmin/login'); //Memanggil function render_view
@@ -46,7 +46,9 @@ class Customer extends CI_Controller
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
 			$password = md5($this->input->post('e_password'));
 			$password = hash("sha512", $password);
-
+			$data_id = array(
+				'id'  => $this->input->post('e_id')
+			);
 			$password2 = md5($this->input->post('e_passwordconfirm'));
 			$password2 = hash("sha512", $password2);
 
@@ -61,7 +63,7 @@ class Customer extends CI_Controller
 				if ($do_upload) {
 					$upload_data = $this->upload->data();
 					$file_name = $upload_data['file_name'];
-					if($password == null || $password == "" || $password2 == null || $password2 == ""){
+					if ($password == null || $password == "" || $password2 == null || $password2 == "") {
 						$data = array(
 							'name'  => $this->input->post('e_nama'),
 							'email'  => $this->input->post('e_email'),
@@ -87,27 +89,34 @@ class Customer extends CI_Controller
 							'updatedBy'	=> $this->session->userdata('name')
 						);
 					}
-				
 				} else {
-					$data = array(
-						'name'  => $this->input->post('e_nama'),
-						'email'  => $this->input->post('e_email'),
-						'phone'  => $this->input->post('e_telp'),
-						'address'  => $this->input->post('e_alamat'),
-						'role_id'  => $this->input->post('role'),
-						'is_active'  => $this->input->post('e_is_active'),
-						'password'  => $password,
-						'createdAt' => date('Y-m-d H:i:s'),
-						'createdBy'	=> $this->session->userdata('name')
-					);
+					if ($password == null || $password == "" || $password2 == null || $password2 == "") {
+						$data = array(
+							'name'  => $this->input->post('e_nama'),
+							'email'  => $this->input->post('e_email'),
+							'phone'  => $this->input->post('e_telp'),
+							'address'  => $this->input->post('e_alamat'),
+							'role_id'  => $this->input->post('e_role'),
+							'is_active'  => $this->input->post('e_is_active'),
+							'updatedAt' => date('Y-m-d H:i:s'),
+							'updatedBy'	=> $this->session->userdata('name')
+						);
+					} else {
+						$data = array(
+							'name'  => $this->input->post('e_nama'),
+							'email'  => $this->input->post('e_email'),
+							'phone'  => $this->input->post('e_telp'),
+							'address'  => $this->input->post('e_alamat'),
+							'role_id'  => $this->input->post('e_role'),
+							'is_active'  => $this->input->post('e_is_active'),
+							'password'  => $password,
+							'updatedAt' => date('Y-m-d H:i:s'),
+							'updatedBy'	=> $this->session->userdata('name')
+						);
+					}
 				}
-				$cek = $this->model_customer->checkDuplicate($data, 'user');
-				if ($cek > 0) {
-					echo json_encode(401);
-				} else {
-					$action = $this->model_customer->insert($data, 'user');
-					echo json_encode($action);
-				}
+				$action = $this->model_customer->update($data_id, $data, 'user');
+				echo json_encode($action);
 			} else {
 				echo json_encode(400);
 			}

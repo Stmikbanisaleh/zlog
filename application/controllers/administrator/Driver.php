@@ -18,7 +18,6 @@ class Driver extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
-			$mywilayah = $this->model_operator->viewOrdering('wilayah', 'id', 'desc')->result_array();
 			$data = array(
 				'page_content'      => '../pageadmin/driver/view',
 				'ribbon'            => '<li class="active">Master Driver</li>',

@@ -5,11 +5,7 @@
 				<form class="form-horizontal" role="form" id="formTambah">
 					<div class="card card-info">
 						<div class="modal-header">
-<<<<<<< HEAD:application/views/pageadmin/ekspedisi/view.php
 							<h4 class="modal-title">Add Jalur Ekpedisi </h4>
-=======
-							<h4 class="modal-title">Add Kepemilikan </h4>
->>>>>>> 755056f0ea452d5843a0ffd514718021a33df03a:application/views/pageadmin/jeniskepemilikan/view.php
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

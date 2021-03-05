@@ -6,21 +6,9 @@
  			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
  		</li>
  		<li class="nav-item d-none d-sm-inline-block">
- 			<a href="<?php echo base_url() . 'dashboard/index' ?>" class="nav-link">Home</a>
+ 			<a href="<?php echo base_url() . 'dashboard/index' ?>" class="nav-link"><b>Home</b></a>
  		</li>
  	</ul>
-
- 	<!-- SEARCH FORM -->
- 	<form class="form-inline ml-3">
- 		<div class="input-group input-group-sm">
- 			<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
- 			<div class="input-group-append">
- 				<button class="btn btn-navbar" type="submit">
- 					<i class="fas fa-search"></i>
- 				</button>
- 			</div>
- 		</div>
- 	</form>
 
  	<!-- Right navbar links -->
  	<ul class="navbar-nav ml-auto">
@@ -38,11 +26,11 @@
  				<i class="far fa-user-circle"></i> Profile
  			</a>
  			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
- 				<div class="dropdown-divider"></div>
+ 				<!-- <div class="dropdown-divider"></div>
  				<a href="#" class="dropdown-item">
  					<i class="fas fa-user"></i> Profile
  					<span class="float-right text-muted text-sm">Edit Profile</span>
- 				</a>
+ 				</a> -->
  				<div class="dropdown-divider"></div>
  				<button href="#modalPassword" class="dropdown-item " type="button" role="button" data-toggle="modal">
  					<i class="fas fa-key"></i> Password Settings
@@ -62,6 +50,49 @@
 
  <section class="content">
  	<div id="modalPassword" class="modal fade" tabindex="-1">
+ 		<div class="modal-dialog modal-lg">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal" role="form" id="formEditPassword">
+ 					<div class="card card-info">
+ 						<div class="modal-header">
+ 							<h4 class="modal-title">Edit Password</h4>
+ 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 								<span aria-hidden="true">&times;</span>
+ 							</button>
+ 						</div>
+ 						<div class="card-body">
+ 							<div class="input-group mb-3">
+ 								<div class="input-group-prepend">
+ 									<span class="input-group-text"><i class="fas fa-key"></i></span>
+ 								</div>
+ 								<input type="password" id="password" name="password" class="form-control" placeholder="Password">
+ 							</div>
+
+ 							<div class="input-group mb-3">
+ 								<div class="input-group-prepend">
+ 									<span class="input-group-text"><i class="fas fa-key"></i></span>
+ 								</div>
+ 								<input type="password" id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="Password Confirm">
+ 							</div>
+ 						</div>
+ 						<!-- /.card-body -->
+ 					</div>
+ 					<div class="modal-footer">
+ 						<button type="submit" id="btn_import" class="btn btn-sm btn-success pull-left">
+ 							<i class="ace-icon fa fa-save"></i>
+ 							Simpan
+ 						</button>
+ 						<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+ 							<i class="ace-icon fa fa-times"></i>
+ 							Batal
+ 						</button>
+ 					</div>
+ 				</form>
+ 			</div><!-- /.modal-content -->
+ 		</div><!-- /.modal-dialog -->
+ 	</div>
+
+ 	<div id="modalEditProfile" class="modal fade" tabindex="-1">
  		<div class="modal-dialog modal-lg">
  			<div class="modal-content">
  				<form class="form-horizontal" role="form" id="formEditPassword">
@@ -136,7 +167,7 @@
  	$(document).ready(function() {
  		function load_unseen_notification(view = '') {
  			$.ajax({
- 				url:  "<?php echo base_url('administrator/customer/notification') ?>",
+ 				url: "<?php echo base_url('administrator/customer/notification') ?>",
  				method: "POST",
  				data: {
  					view: view

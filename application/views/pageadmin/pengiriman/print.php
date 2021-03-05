@@ -279,7 +279,7 @@
                 <td>Total</td>
                 <td>: IDR</td>
                 <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr>
+            </tr> -->
         </table>
         <hr style="border: 0.2px; margin-top: -15px;">
 

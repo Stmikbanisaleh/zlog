@@ -306,8 +306,8 @@
 			<h3 class="card-title">Daftar Pengiriman</h3>
 		</div>
 		<br>
-		<div class="col-sm-2">
-			<button href="#modalTambah" type="button" role="button" data-toggle="modal" class="btn btn-block btn-primary"><a class="ace-icon fa fa-plus bigger-120"></a> Add Pengiriman</button>
+		<div class="col-sm-2" >
+			<button href="#modalTambah" type="button" role="button" data-toggle="modal" class="btn btn-block btn-primary" style="background-color:#509a7f ;"><a class="ace-icon fa fa-plus bigger-120"></a> Add Pengiriman</button>
 		</div>
 		<br>
 		<div class="card-body p-0">
@@ -545,7 +545,7 @@
 						'</td>' +
 						'<td class="project-actions text-right">' +
 						'   <button  class="btn btn-secondary btn-sm"  data-id="' + data[i].id + '">' +
-						'      <a href="<?php echo base_url('administrator/pengiriman/print/') ?>'+data[i].id+'" class="text-light" target="_blank"> <i class="fas fa-print"> </i>  Print </a>' +
+						'      <a href="<?php echo base_url('administrator/pengiriman/print2/') ?>'+data[i].id+'" class="text-light" target="_blank"> <i class="fas fa-print"> </i>  Print </a>' +
 						'</button> &nbsp' +
 						'   <button  class="btn btn-info btn-sm item_detail"  data-id="' + data[i].id + '">' +
 						'      <i class="fas fa-eye"> </i>  Detail </a>' +

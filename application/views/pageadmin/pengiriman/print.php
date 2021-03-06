@@ -60,7 +60,7 @@
 
 <body onload="window.print()">
     <div class="title">
-        <b>E-CONSIGNMENT NOTE (e-connote)</b>
+        Airwaybill <b>(<?= $pengiriman->airwaybill; ?>)</b>
     </div>
     <div class="layer1">
         <div class="logo">
@@ -174,18 +174,18 @@
                     <td>:</td>
                     <td> </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>Nilai Barang</td>
                     <td>:</td>
                     <td> </td>
-                </tr>
+                </tr> -->
                 <tr style="height: 20px;">
                     <td> </td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: center; font-size: 7px; padding-right: 15px; padding-top: 35px;"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <br>1500s, when an unknown printer</b></td>
+                    <td colspan="3" style="text-align: center; font-size: 7px; padding-right: 15px; padding-top: 35px;"><b><?= $profile->kata_footer1?></b></td>
                 </tr>
             </table>
             
@@ -195,22 +195,22 @@
     <div class="layer2">
         <table style="width: 100%; margin-bottom: 15px;">
             <tr>
-                <td colspan="3">27-01-2021 03:01:01</td>
+                <td colspan="3"><?= $now ?></td>
                 <td style="text-align: right; font-family: Arial, Helvetica, sans-serif;" colspan="3"><b>UNTUK PENGIRIM</b></td>
             </tr>
             <tr style="height: 7px;">
                 <td colspan="6"> </td>
             </tr>
             <tr>
-                <td style="width: 15%;">Layanan</td>
+                <td style="width: 15%;">Jalur Pengiriman </td>
                 <td style="width: 1%;">:</td>
                 <td style="width: 24%;"></td>
-                <td style="width: 15%;">No e-connote</td>
+                <td style="width: 15%;">No Airwaybill </td>
                 <td style="width: 1%;">:</td>
-                <td style="width: 24%;">BK1G0045F44</td>
+                <td style="width: 24%;"><?= $pengiriman->airwaybill; ?></td>
             </tr>
             <tr>
-                <td colspan="6"><b>YES13 (JNE YES)</b></td>
+                <td colspan="6"><b><?= $pengiriman->jalur?></b></td>
             </tr>
             <tr>
                 <td>Jenis Kiriman</td>
@@ -226,7 +226,6 @@
             <tr>
                 <td rowspan="2" style="text-align: center;">Keterangan</td>
                 <td rowspan="2" style="text-align: center;">Jml</td>
-                <td rowspan="2" style="text-align: center;">Berat Asli</td>
                 <td colspan="3" style="text-align: center;" style="text-align: center;">Dimensi</td>
                 <td rowspan="2" style="text-align: center;">Berat Volume</td>
             </tr>
@@ -235,51 +234,24 @@
                 <td style="text-align: center;">H</td>
                 <td style="text-align: center;">W</td>
             </tr>
+			<?php foreach($pengiriman_detail as $value) {?>
             <tr>
-                <td style="width: 30px;"></td>
-                <td style="width: 50px; text-align: center;">1</td>
-                <td style="width: 70px; text-align: center;">1.00</td>
-                <td style="width: 35px; text-align: center;">X</td>
-                <td style="width: 35px; text-align: center;">X</td>
-                <td style="width: 35px; text-align: center;">X</td>
-                <td style="width: 70px; text-align: center;">0.00</td>
+                <td style="width: 30px;"><?= $value['nama_barang']; ?></td>
+                <td style="width: 50px; text-align: center;"><?= $value['jml'];?> <?= ($value['satuan'])?></td>
+                <td style="width: 35px; text-align: center;"><?= $value['l'] ?></td>
+                <td style="width: 35px; text-align: center;"><?= $value['h'] ?></td>
+                <td style="width: 35px; text-align: center;"><?= $value['w'] ?></td>
+                <td style="width: 70px; text-align: center;"><?= $value['berat'] ?></td>
             </tr>
+			<?php } ?>
         </table>
 
         <table>
             <tr>
-                <td style="width: 70px;">Jumlah</td>
-                <td style="width: 5px;">:</td>
-                <td style="width: 160px;">1</td>
-                <td style="width: 50px;">Berat</td>
-                <td style="width: 5px;">:</td>
-                <td style="width: 28px; text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td>Biaya Kirim</td>
-                <td>: IDR</td>
-                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr>
-            <tr>
-                <td>Biaya Lain-lain</td>
-                <td>: IDR</td>
-                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr>
-            <tr>
                 <td>Asuransi</td>
-                <td>: IDR</td>
-                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
+                <td>: </td>
+                <td><b><?= $pengiriman->asuransi; ?></b></td>
             </tr>
-            <tr>
-                <td>Adm Asuransi</td>
-                <td>: IDR</td>
-                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>: IDR</td>
-                <td style="text-align: right;" colspan="4">Rp. 200.000.000</td>
-            </tr> -->
         </table>
         <hr style="border: 0.2px; margin-top: -15px;">
 
@@ -329,26 +301,17 @@
                 <td></td>
             </tr>
             <tr>
-                <td style="text-align: center;">( AGEN ANDRA ASTRO JAYA )</td>
+                <td style="text-align: center;">( <?= $profile->nama_perusahaan?> )</td>
                 <td style="text-align: center;">(.......................)</td>
             </tr>
             <tr>
-                <td style="padding-left: 20px;">20-JAN-2021 01:00</td>
+                <td style="padding-left: 40px;"><?= $now2 ?></td>
                 <td></td>
             </tr>
         </table>
 
         <div class="note" style="margin-top: 15px; font-size: 7px;">
-            Ketentuan berlaku**<br>
-            1. Tanggal dan tempat surat muatan udara dibuat. <br>
-            2. Tempat pemberangkatan dan tujuan.<br>
-            3. Nama dan alamat pengangkut pertama.<br>
-            4. Nama dan alamat pengirim kargo.<br>
-            5. Nama dan alamat penerima kargo.<br>
-            6. Jumlah, cara pembungkusan, tanda-tanda istimewa, atau nomor kargo yang ada.<br>
-            7. Jumlah, berat, ukuran, atau besarnya kargo.<br>
-            8. Jenis atau macam kargo yang dikirim.<br>
-            9. Pernyataan bahwa pengangkutan kargo ini tunduk pada ketentuan dalam undang-undang.<br>
+          <?= $profile->kata_footer2; ?>
         </div>
     </div>
 </body>

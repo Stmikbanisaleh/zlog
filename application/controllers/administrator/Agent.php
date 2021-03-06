@@ -50,6 +50,7 @@ class Agent extends CI_Controller
 				'keterangan'  => $this->input->post('e_keterangan'),
 				'telp'  => $this->input->post('e_telp'),
 				'alamat'  => $this->input->post('e_alamat'),
+				'kodepos'  => $this->input->post('e_kodepos'),
 				'pj'  => $this->input->post('e_pj'),
 				'updatedAt' => date('Y-m-d H:i:s'),
 				'updatedBy' => $this->session->userdata('name'),
@@ -99,6 +100,7 @@ class Agent extends CI_Controller
 				'keterangan'  => $this->input->post('keterangan'),
 				'pj'  => $this->input->post('pj'),
 				'alamat'  => $this->input->post('alamat'),
+				'kodepos'  => $this->input->post('kodepos'),
 				'telp'  => $this->input->post('telp'),
 				'createdAt' => date('Y-m-d H:i:s'),
 				'createdBy'	=> $this->session->userdata('name')

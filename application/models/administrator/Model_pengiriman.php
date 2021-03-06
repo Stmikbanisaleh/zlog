@@ -57,7 +57,8 @@ class Model_pengiriman extends CI_model
                                     a.telp,
                                     a.pj,
                                     a.kodepos,
-                                    e.nama jalur
+                                    e.nama jalur,
+									p.asuransi
                                 FROM
                                 pengiriman p,
                                 agent a,
@@ -67,6 +68,13 @@ class Model_pengiriman extends CI_model
                                 AND e.id = p.jalur
                                 AND p.driver = d.id
                                 AND p.id = $id");
+    }
+
+	public function viewPengirimanDetail($id){
+        return $this->db->query("SELECT a.id_pengiriman,b.nama as nama_barang,a.satuan as jml,b.satuan,b.sku,a.l,a.h,a.w,a.berat FROM pengiriman_detail a 
+		join barang b on a.barang = b.id
+                                WHERE 
+                                a.id_pengiriman = $id");
     }
 
 	

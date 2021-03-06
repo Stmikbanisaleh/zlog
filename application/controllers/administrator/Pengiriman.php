@@ -86,6 +86,7 @@ class Pengiriman extends CI_Controller
 			$data = array(
 				'nama'  => $this->input->post('e_nama'),
 				'keterangan'  => $this->input->post('e_keterangan'),
+				'asuransi'  => $this->input->post('e_asuransi'),
 				'updatedAt' => date('Y-m-d H:i:s'),
 				'updatedBy' => $this->session->userdata('name'),
 			);
@@ -172,6 +173,7 @@ class Pengiriman extends CI_Controller
 				'driver'  => $this->input->post('driver'),
 				'tgl_pengiriman'  => $this->input->post('tgl'),
 				'tgl_estimasi'  => $this->input->post('tgl2'),
+				'asuransi'  => $this->input->post('asuransi'),
 				'deskripsi'	=> $this->input->post('keterangan2'),
 				'jalur'  => $this->input->post('jalur'),
 				'createdAt' => date('Y-m-d H:i:s'),
@@ -196,17 +198,47 @@ class Pengiriman extends CI_Controller
 	public function simpanItem()
 	{
 		if ($this->session->userdata('email') != null && $this->session->userdata('name') != null) {
-
-			$data = array(
-				'id_pengiriman'  => $this->input->post('id_pengiriman'),
-				'barang'  => $this->input->post('barang'),
-				'satuan'  => $this->input->post('satuan'),
-				'berat'  => $this->input->post('berat'),
-				'harga'  => $this->input->post('harga'),
-				'dimensi'  => $this->input->post('dimensi'),
-				'createdAt' => date('Y-m-d H:i:s'),
-				'createdBy'	=> $this->session->userdata('name')
-			);
+			$berat = $this->input->post('berat');
+			$jarak = $this->input->post('jarak');
+			$l =  $this->input->post('l');
+			$w =  $this->input->post('w');
+			$h =  $this->input->post('w');
+			if($berat != null || $berat != "" && $jarak != null || $jarak != ""){
+				//menggunakan berat
+				$hargaPerKg = $this->db->query("select harga from biaya_kg limit 1")->result_array();
+				$hargaPerKg = $hargaPerKg[0]['harga'];
+				//- mendapatkan harga tipe kg , jumlah kg x harga, x jarak. km, 10 x 100000 = 1000.000 harga per kg.  
+				$harga = $hargaPerKg * $this->input->post('satuan') *$jarak;
+				$data = array(
+					'id_pengiriman'  => $this->input->post('id_pengiriman'),
+					'barang'  => $this->input->post('barang'),
+					'satuan'  => $this->input->post('satuan'),
+					'berat'  => $this->input->post('berat'),
+					'jarak'  => $this->input->post('jarak'),
+					'harga'  => $harga,
+					'createdAt' => date('Y-m-d H:i:s'),
+					'createdBy'	=> $this->session->userdata('name')
+				);
+			} else {
+					//menggunakan dimensi
+					//dimensi , 60 x 30 x 30  / 6000 x 100000 = harga per dimensi.
+					$hargaPerKg = $this->db->query("select dimensi_bagi, dimensi_harga from biaya_dimensi limit 1")->result_array();
+					$dimensi_harga = $hargaPerKg[0]['dimensi_harga'];
+					$dimensi_bagi = $hargaPerKg[0]['dimensi_bagi'];
+					$harga = $l * $w * $h / $dimensi_bagi * $dimensi_harga * $this->input->post('satuan');
+					$data = array(
+						'id_pengiriman'  => $this->input->post('id_pengiriman'),
+						'barang'  => $this->input->post('barang'),
+						'harga'  => $harga,
+						'l'  => $this->input->post('l'),
+						'w'  => $this->input->post('w'),
+						'satuan'  => $this->input->post('satuan'),
+						'h'  => $this->input->post('h'),
+						'createdAt' => date('Y-m-d H:i:s'),
+						'createdBy'	=> $this->session->userdata('name')
+					);
+			}
+		
 			$action = $this->model_pengiriman->insert($data, 'pengiriman_detail');
 			echo json_encode($action);
 		} else {
@@ -224,8 +256,11 @@ class Pengiriman extends CI_Controller
 			// title dari pdf
 			$this->data['title_pdf'] = 'Laporan HWB';
 			$this->data['profile']	= $this->model_pengiriman->viewProfile()->row();
+			$this->data['pengiriman_detail']	= $this->model_pengiriman->viewPengirimanDetail($id)->result_array();
 			$this->data['pengiriman']	= $this->model_pengiriman->viewPengiriman($id)->row();
-			
+			$this->data['now'] = date('Y-m-d H:i:s');
+			$this->data['now2'] = date('d-M-Y');
+
 			// filename dari pdf ketika didownload
 			$file_pdf = 'Print HWB';
 			// setting paper

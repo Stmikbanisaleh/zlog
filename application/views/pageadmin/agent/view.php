@@ -35,6 +35,13 @@
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-label"></i></span>
+								</div>
+								<input required type="text" id="kodepos" name="kodepos" class="form-control" placeholder="Kode Pos">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-cog"></i></span>
 								</div>
 								<textarea type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan"></textarea>
@@ -101,6 +108,13 @@
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-label"></i></span>
+								</div>
+								<input required type="text" id="e_kodepos" name="e_kodepos" class="form-control" placeholder="Kode Pos">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-cog"></i></span>
 								</div>
 								<textarea type="text" id="e_keterangan" name="e_keterangan" class="form-control" placeholder="Keterangan"></textarea>
@@ -160,12 +174,15 @@
 							Telp
 						</th>
 						<th class="text-center">
+							Kode Pos
+						</th>
+						<th class="text-center">
 							Keterangan
 						</th>
 						<th class="text-center">
 							Alamat
 						</th>
-						<th class="text-center">
+						<th style="width: 15%" class="text-center">
 							Actions
 						</th>
 					</tr>
@@ -280,6 +297,7 @@
 						'<td class="text-left">' + data[i].nama + '</td>' +
 						'<td class="text-left">' + data[i].pj + '</td>' +
 						'<td class="text-left">' + data[i].telp + '</td>' +
+						'<td class="text-left">' + data[i].kodepos + '</td>' +
 						'<td class="text-left">' + data[i].keterangan + '</td>' +
 						'<td class="text-left">' + data[i].alamat + '</td>' +
 						'<td class="project-actions text-right">' +
@@ -328,6 +346,7 @@
 				$('#e_nama').val(data[0].nama);
 				$('#e_alamat').val(data[0].alamat);
 				$('#e_telp').val(data[0].telp);
+				$('#e_kodepos').val(data[0].kodepos);
 				$('#e_pj').val(data[0].pj);
 				$('#e_keterangan').val(data[0].keterangan);
 			}

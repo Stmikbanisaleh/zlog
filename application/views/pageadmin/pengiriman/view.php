@@ -66,8 +66,8 @@
 								<label>Asuransi</label>
 								<select required class="form-control select2" style="width: 100%;" name="asuransi" id="asuransi">
 									<option selected="selected">-- Pilih --</option>
-									<option value="0">-- Tidak --</option>
-									<option value="1">-- YA --</option>
+									<option value="Tidak">-- Tidak --</option>
+									<option value="Ya">-- YA --</option>
 								</select>
 							</div>
 
@@ -129,17 +129,18 @@
 
 							<div class="form-group">
 								<label>Berat</label>
-								<input required type="number" id="berat" name="berat" class="form-control" placeholder="Kilogram">
-							</div>
-
-							<div class="form-group">
-								<label>Harga</label>
-								<input required type="number" id="harga" name="harga" class="form-control" placeholder="Harga Pengiriman">
+								<input type="number" id="berat" name="berat" class="form-control" placeholder="Kilogram">
+								<br>
+								<input type="number" id="jarak" name="jarak" class="form-control" placeholder="Jarak">
 							</div>
 
 							<div class="form-group">
 								<label>Dimensi</label>
-								<input required type="number" id="dimensi" name="dimensi" class="form-control" placeholder="Dimensi Item">
+								<input type="number" id="l" name="l" class="form-control" placeholder="Panjang">
+								<br>
+								<input type="number" id="w" name="w" class="form-control" placeholder="Lebar">
+								<br>
+								<input type="number" id="h" name="h" class="form-control" placeholder="Tinggi">
 							</div>
 
 							<div class="form-group">
@@ -169,74 +170,6 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div>
-
-	<div id="modalEdit" class="modal fade" tabindex="-1">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<form class="form-horizontal" role="form" id="formEdit">
-					<div class="card card-info">
-						<div class="modal-header">
-							<h4 class="modal-title">Edit Jenis Pelanggan</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="card-body">
-							<div class="form-group">
-								<input type="hidden" id="id_pengiriman" name="id_pengiriman" class="form-control">
-								<label>Nama Item</label>
-								<select class="form-control select2" style="width: 100%;" name="e_barang" id="e_barang">
-									<option selected="selected">-- Pilih --</option>
-									<?php foreach ($mybarang as $value) { ?>
-										<option value=<?= $value['id'] ?>><?= $value['nama'] ?></option>
-									<?php } ?>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label>Berat</label>
-								<input required type="hidden" id="e_id" name="e_id" class="form-control" placeholder="Kilogram">
-								<input required type="number" id="e_berat" name="e_berat" class="form-control" placeholder="Kilogram">
-							</div>
-
-							<div class="form-group">
-								<label>Harga</label>
-								<input required type="number" id="e_harga" name="e_harga" class="form-control" placeholder="Harga Pengiriman">
-							</div>
-
-							<div class="form-group">
-								<label>Dimensi</label>
-								<input required type="number" id="e_dimensi" name="e_dimensi" class="form-control" placeholder="Dimensi Item">
-							</div>
-
-							<div class="form-group">
-								<label>Jumlah Satuan</label>
-								<input required type="number" id="e_satuan" name="e_satuan" class="form-control" placeholder="Jumlah Item">
-							</div>
-
-							<div class="form-group">
-								<label>Keterangan</label>
-								<textarea id="e_keterangan" name="e_keterangan" class="form-control" placeholder="Crafting / Non Crafting"></textarea>
-							</div>
-
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<div class="modal-footer">
-						<button type="submit" id="btn_import" class="btn btn-sm btn-success pull-left">
-							<i class="ace-icon fa fa-save"></i>
-							Simpan
-						</button>
-						<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-							<i class="ace-icon fa fa-times"></i>
-							Batal
-						</button>
-					</div>
-				</form>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div>
-
 
 	<div id="modalDetail" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">
@@ -306,7 +239,7 @@
 			<h3 class="card-title">Daftar Pengiriman</h3>
 		</div>
 		<br>
-		<div class="col-sm-2" >
+		<div class="col-sm-2">
 			<button href="#modalTambah" type="button" role="button" data-toggle="modal" class="btn btn-block btn-primary" style="background-color:#509a7f ;"><a class="ace-icon fa fa-plus bigger-120"></a> Add Pengiriman</button>
 		</div>
 		<br>
@@ -340,7 +273,7 @@
 						<th class="text-center">
 							Keterangan
 						</th>
-						<th style="width: 20%" class="text-center">
+						<th style="width: 25%" class="text-center">
 							Action
 						</th>
 					</tr>
@@ -545,13 +478,10 @@
 						'</td>' +
 						'<td class="project-actions text-right">' +
 						'   <button  class="btn btn-secondary btn-sm"  data-id="' + data[i].id + '">' +
-						'      <a href="<?php echo base_url('administrator/pengiriman/print/') ?>'+data[i].id+'" class="text-light" target="_blank"> <i class="fas fa-print"> </i>  Print </a>' +
+						'      <a href="<?php echo base_url('administrator/pengiriman/print/') ?>' + data[i].id + '" class="text-light" target="_blank"> <i class="fas fa-print"> </i>  Print </a>' +
 						'</button> &nbsp' +
 						'   <button  class="btn btn-info btn-sm item_detail"  data-id="' + data[i].id + '">' +
 						'      <i class="fas fa-eye"> </i>  Detail </a>' +
-						'</button> &nbsp' +
-						'   <button  class="btn btn-primary btn-sm item_edit"  data-id="' + data[i].id + '">' +
-						'      <i class="fas fa-folder"> </i>  Edit </a>' +
 						'</button> &nbsp' +
 						'   <button  class="btn btn-danger btn-sm item_hapus"  data-id="' + data[i].id + '">' +
 						'      <i class="fas fa-trash"> </i>  Hapus </a>' +
@@ -719,5 +649,27 @@
 			$('#modalDetail').modal('hide');
 			$("#id_pengiriman").val($("#id_p").val());
 		});
+
+		$("#berat").keypress(function() {
+			$("#l").prop('disabled', true);
+			$("#w").prop('disabled', true);
+			$("#h").prop('disabled', true);
+		});
+
+		$("#l").keypress(function() {
+			$("#berat").prop('disabled', true);
+			$("#jarak").prop('disabled', true);
+		});
+
+		$("#w").keypress(function() {
+			$("#berat").prop('disabled', true);
+			$("#jarak").prop('disabled', true);
+		});
+
+		$("#h").keypress(function() {
+			$("#berat").prop('disabled', true);
+			$("#jarak").prop('disabled', true);
+		});
+
 	});
 </script>

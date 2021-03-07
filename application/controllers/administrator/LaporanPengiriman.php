@@ -5,7 +5,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-class LaporanPengiriman extends CI_Controller
+class Laporanpengiriman extends CI_Controller
 {
 	function __construct()
 	{
